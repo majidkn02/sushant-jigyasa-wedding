@@ -1,0 +1,231 @@
+/* Ribbons, frames, corners, garlands, mandala, diya, dividers */
+
+/* ── Maroon ribbon heading with gold scroll ends (as on the card) ───────── */
+.ribbon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 0 4px;
+}
+.ribbon-text {
+  position: relative;
+  display: inline-block;
+  padding: 8px clamp(18px, 4vw, 30px) 6px;
+  background: linear-gradient(180deg, var(--maroon-2), var(--maroon) 55%, var(--maroon-deep));
+  color: var(--cream);
+  font-family: var(--font-deva);
+  font-size: clamp(1.3rem, 1rem + 1.4vw, 1.9rem);
+  line-height: 1.5;
+  border-radius: 999px;
+  box-shadow:
+    inset 0 0 0 1.5px var(--gold-2),
+    inset 0 0 0 4px var(--maroon),
+    inset 0 0 0 5px rgba(214, 177, 90, 0.5),
+    0 6px 16px rgba(82, 0, 17, 0.25);
+  white-space: nowrap;
+}
+.ribbon-sm .ribbon-text {
+  font-size: clamp(1.05rem, 0.95rem + 0.6vw, 1.35rem);
+  padding: 6px 22px 4px;
+}
+.ribbon-end {
+  width: clamp(26px, 6vw, 40px);
+  height: clamp(26px, 6vw, 40px);
+  flex: none;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.ribbon-end circle {
+  fill: var(--gold);
+  stroke: none;
+}
+.ribbon-end-l {
+  margin-right: -4px;
+}
+.ribbon-end-r {
+  margin-left: -4px;
+  transform: scaleX(-1);
+}
+.ribbon-on-dark .ribbon-text {
+  background: linear-gradient(180deg, #a3132a, var(--maroon-2));
+}
+
+/* ── Arch photo frame (gold double line, like the card's arches) ────────── */
+.arch-frame {
+  position: relative;
+  border-radius: 999px 999px var(--radius) var(--radius);
+  padding: 10px;
+  background: linear-gradient(160deg, var(--gold-light), var(--gold) 45%, var(--gold-deep));
+  box-shadow: var(--shadow-lg);
+}
+.arch-frame::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 247, 230, 0.75);
+  pointer-events: none;
+  z-index: 2;
+}
+.arch-frame .photo-btn {
+  border-radius: 999px 999px 8px 8px;
+}
+.arch-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--cream-2);
+  overflow: hidden;
+  cursor: zoom-in;
+  -webkit-tap-highlight-color: transparent;
+}
+.photo-btn img {
+  transition: transform 0.9s var(--ease), filter 0.5s;
+}
+.photo-btn:hover img {
+  transform: scale(1.035);
+}
+.photo-zoom {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 247, 230, 0.92);
+  color: var(--maroon);
+  box-shadow: var(--shadow-sm);
+  opacity: 0.85;
+  transition: opacity 0.3s, transform 0.3s var(--ease-out-back);
+}
+.photo-zoom svg {
+  width: 18px;
+  height: 18px;
+}
+.photo-btn:hover .photo-zoom,
+.photo-btn:focus-visible .photo-zoom {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* ── Corners ────────────────────────────────────────────────────────────── */
+.corner {
+  position: absolute;
+  width: clamp(70px, 14vw, 130px);
+  height: auto;
+  z-index: 3;
+  pointer-events: none;
+}
+.corner-tl {
+  top: -10px;
+  left: -10px;
+  transform: scaleY(-1);
+}
+.corner-tr {
+  top: -10px;
+  right: -10px;
+  transform: scale(-1, -1);
+}
+.corner-bl {
+  bottom: -10px;
+  left: -10px;
+}
+.corner-br {
+  bottom: -10px;
+  right: -10px;
+  transform: scaleX(-1);
+}
+.section-corner {
+  width: clamp(90px, 16vw, 170px);
+  opacity: 0.9;
+  z-index: -1;
+}
+.section-corner.corner-tl,
+.section-corner.corner-tr {
+  top: 0;
+}
+.section-corner.corner-bl,
+.section-corner.corner-br {
+  bottom: 0;
+}
+.section-corner.corner-tl,
+.section-corner.corner-bl {
+  left: 0;
+}
+.section-corner.corner-tr,
+.section-corner.corner-br {
+  right: 0;
+}
+
+/* ── Garland ────────────────────────────────────────────────────────────── */
+.garland {
+  width: 30px;
+  height: auto;
+  transform-origin: top center;
+}
+
+/* ── Mandala ────────────────────────────────────────────────────────────── */
+.mandala {
+  color: var(--gold);
+}
+
+/* ── Divider (draws itself in) ──────────────────────────────────────────── */
+.divider {
+  color: var(--gold);
+  height: auto;
+  overflow: visible;
+}
+.divider-line {
+  stroke: currentColor;
+  stroke-width: 1.2;
+  fill: none;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+}
+
+/* ── Diya ───────────────────────────────────────────────────────────────── */
+.diya {
+  width: 56px;
+  height: auto;
+  overflow: visible;
+}
+.diya .diya-glow {
+  opacity: 0.25;
+  transition: opacity 1.2s var(--ease);
+  transform-origin: 40px 26px;
+}
+.diya.is-lit .diya-glow {
+  opacity: 0.85;
+}
+.diya-flame {
+  transform-origin: 40px 36px;
+}
+
+/* ── Lotus ──────────────────────────────────────────────────────────────── */
+.lotus {
+  width: 64px;
+  height: auto;
+}
+
+/* ── Ceremony icon ──────────────────────────────────────────────────────── */
+.ceremony-icon {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.ceremony-flame {
+  transform-origin: 50px 54px;
+}

@@ -1,0 +1,98 @@
+/* Design tokens — colours, type, spacing, motion. Taken from the invitation card. */
+:root {
+  /* Cream / ivory — the dominant surfaces */
+  --cream: #fff7e6;
+  --cream-2: #f8ebd1;
+  --paper: #f4eddf; /* matches the watercolour sketch's paper */
+  --white: #fffdf8;
+
+  /* Maroon / red — hierarchy */
+  --maroon: #7a0019;
+  --maroon-2: #8b0a1a;
+  --maroon-deep: #520011;
+  --red: #b11226;
+
+  /* Green — foliage only */
+  --green: #486b3c;
+  --green-2: #5c8248;
+  --whatsapp: #1f7a46; /* darker than WhatsApp green for readable white text */
+
+  /* Antique gold — borders, ornaments (decorative); use --gold-text for gold text on cream */
+  --gold: #c69a45;
+  --gold-2: #d6b15a;
+  --gold-light: #ead39a;
+  --gold-deep: #8a6420;
+  --gold-text: #7e5a17;
+
+  /* Text */
+  --text: #4a251d;
+  --text-soft: #6a463a;
+  --text-on-dark: #fff4dc;
+
+  /* Type */
+  --font-display: 'Cormorant Garamond', 'Cormorant', 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'Mukta', 'Tiro Devanagari Hindi', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-deva: 'Tiro Devanagari Hindi', 'Noto Serif Devanagari', 'Mukta', serif;
+
+  --fs-body: clamp(1.02rem, 0.98rem + 0.2vw, 1.12rem);
+  --fs-small: 0.92rem;
+  --fs-kicker: 0.78rem;
+  --fs-h2: clamp(2.1rem, 1.6rem + 2.4vw, 3.4rem);
+  --fs-h3: clamp(1.6rem, 1.35rem + 1.2vw, 2.2rem);
+
+  /* Spacing (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --gutter: 16px;
+  --section-pad: clamp(64px, 9vw, 120px);
+  --container: 1140px;
+
+  /* Shape & depth */
+  --radius: 14px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 2px 8px rgba(82, 0, 17, 0.08);
+  --shadow: 0 10px 30px rgba(82, 0, 17, 0.12), 0 2px 6px rgba(82, 0, 17, 0.06);
+  --shadow-lg: 0 24px 60px rgba(82, 0, 17, 0.2);
+  --frame: 0 0 0 1px var(--gold), 0 0 0 5px var(--cream), 0 0 0 6px var(--gold);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur: 0.7s;
+
+  /* Layout helpers */
+  --nav-h: 64px;
+  --dock-h: 0px;
+}
+
+@media (min-width: 480px) {
+  :root {
+    --gutter: 20px;
+  }
+}
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+    --nav-h: 72px;
+  }
+}
+/* Tablets / small laptops: extra side room so the floating buttons never cover content */
+@media (min-width: 768px) and (max-width: 1279.98px) {
+  :root {
+    --gutter: 84px;
+  }
+  .navbar {
+    --gutter: 32px;
+  }
+}
+@media (max-width: 767.98px) {
+  :root {
+    --dock-h: calc(62px + env(safe-area-inset-bottom, 0px));
+  }
+}

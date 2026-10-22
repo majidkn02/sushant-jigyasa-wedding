@@ -1,0 +1,40 @@
+/*
+ * Self-hosted fonts (SIL Open Font License — licences in src/assets/fonts).
+ * To change a font, replace the file and keep the font-family name,
+ * or edit the --font-* variables in tokens.css.
+ */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../assets/fonts/cormorant-garamond-var.woff') format('woff');
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../assets/fonts/cormorant-garamond-italic-var.woff') format('woff');
+  font-weight: 500 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Mukta';
+  src: url('../assets/fonts/mukta-regular-latin.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Mukta';
+  src: url('../assets/fonts/mukta-semibold-latin.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Tiro Devanagari Hindi';
+  src: url('../assets/fonts/tiro-devanagari-hindi.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

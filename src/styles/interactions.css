@@ -1,0 +1,480 @@
+/* Scroll reveals, floating actions, microinteractions, keyframes, reduced motion */
+
+/* ── Reveal on scroll ───────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal-up {
+  transform: translateY(26px);
+}
+.reveal-scale {
+  transform: scale(0.94);
+}
+.reveal-left {
+  transform: translateX(-28px);
+}
+.reveal-right {
+  transform: translateX(28px);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+/* Hold hero reveals until the opening screen has gone */
+.site:not(.is-revealed) .reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: none;
+}
+.reveal.is-in .divider-line,
+.section-head.is-in .divider-line {
+  animation: drawLine 1.2s 0.3s var(--ease) both;
+}
+
+/* ── Floating actions ───────────────────────────────────────────────────── */
+.fab-wrap {
+  position: fixed;
+  z-index: 70;
+  pointer-events: none;
+}
+.fab-dock,
+.music-hint {
+  pointer-events: auto;
+}
+.fab {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 0;
+  text-decoration: none;
+  cursor: pointer;
+  font: 600 0.7rem/1 var(--font-body);
+  letter-spacing: 0.04em;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.25s var(--ease),
+    background 0.25s,
+    opacity 0.25s;
+}
+.fab svg {
+  width: 22px;
+  height: 22px;
+}
+.fab-tip {
+  display: none;
+}
+.eq {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5px;
+  height: 9px;
+}
+.eq i {
+  width: 2px;
+  height: 100%;
+  background: currentColor;
+  transform-origin: bottom;
+  animation: eq 0.9s ease-in-out infinite;
+}
+.eq i:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.eq i:nth-child(3) {
+  animation-delay: -0.6s;
+}
+
+.music-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--maroon);
+  color: var(--cream);
+  font: 600 0.9rem var(--font-body);
+  box-shadow: inset 0 0 0 1px var(--gold-2), var(--shadow);
+  cursor: pointer;
+  animation: hintIn 0.5s var(--ease-out-back);
+}
+.music-hint svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Phones: bottom dock */
+@media (max-width: 767.98px) {
+  .fab-wrap {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .music-hint {
+    margin-bottom: 10px;
+  }
+  .fab-dock {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: var(--dock-h);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: rgba(255, 247, 230, 0.97);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 -1px 0 var(--gold), 0 -8px 24px rgba(82, 0, 17, 0.1);
+  }
+  .fab {
+    height: 62px;
+    background: none;
+    color: var(--maroon);
+  }
+  .fab:active {
+    transform: scale(0.94);
+  }
+  .fab-blessing {
+    color: var(--whatsapp);
+  }
+  .fab-music.is-playing {
+    color: var(--red);
+  }
+  .fab-top:not(.is-visible) {
+    opacity: 0.45;
+  }
+}
+
+/* Tablet & desktop: floating column bottom-right */
+@media (min-width: 768px) {
+  .fab-wrap {
+    right: max(20px, env(safe-area-inset-right));
+    bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .fab-dock {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .fab {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--maroon);
+    box-shadow: 0 0 0 1px var(--gold), var(--shadow);
+  }
+  .fab-label {
+    display: none;
+  }
+  .fab:hover,
+  .fab:focus-visible {
+    transform: translateY(-2px) scale(1.05);
+  }
+  .fab-blessing {
+    background: var(--whatsapp);
+    color: #fff;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4), var(--shadow);
+  }
+  .fab-music.is-playing {
+    background: var(--maroon);
+    color: var(--cream);
+  }
+  .fab-top {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+  }
+  .fab-top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+  .fab-tip {
+    display: block;
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    translate: 0 -50%;
+    white-space: nowrap;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: var(--maroon-deep);
+    color: var(--cream);
+    font-size: 0.82rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .fab:hover .fab-tip,
+  .fab:focus-visible .fab-tip {
+    opacity: 1;
+  }
+}
+
+/* ── Microinteractions ──────────────────────────────────────────────────── */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 236, 190, 0.45);
+  transform: scale(0);
+  animation: ripple 0.65s ease-out forwards;
+  pointer-events: none;
+}
+.diya.is-lit .diya-flame {
+  animation: flicker 2.4s ease-in-out infinite;
+}
+.wedding-day.is-lit .wd-agni .ceremony-flame,
+.ceremony-card:hover .ceremony-flame {
+  animation: flicker 1.8s ease-in-out infinite;
+}
+.mandala-spin,
+.hero-mandala,
+.countdown-mandala {
+  animation: spin 120s linear infinite;
+}
+.wedding-day .wd-diya .diya-glow {
+  opacity: 0.15;
+}
+.wedding-day.is-lit .wd-diya .diya-glow {
+  opacity: 0.95;
+  animation: glow 3s ease-in-out infinite;
+}
+.parinay-lotus {
+  animation: bob 5s ease-in-out infinite;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes ripple {
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+@keyframes flicker {
+  0%,
+  100% {
+    transform: scale(1, 1) rotate(0deg);
+  }
+  25% {
+    transform: scale(0.96, 1.05) rotate(-1.5deg);
+  }
+  50% {
+    transform: scale(1.03, 0.97) rotate(1deg);
+  }
+  75% {
+    transform: scale(0.98, 1.03) rotate(-0.5deg);
+  }
+}
+@keyframes glow {
+  50% {
+    opacity: 0.6;
+  }
+}
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+@keyframes bob {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+@keyframes cue {
+  0% {
+    transform: scaleY(0);
+    opacity: 1;
+  }
+  70% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+@keyframes goldShimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -50% 0;
+  }
+}
+@keyframes travel {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 14px);
+    opacity: 0;
+  }
+}
+@keyframes travelX {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 14px);
+    opacity: 0;
+  }
+}
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+@keyframes hintIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+}
+@keyframes heartPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 10px) scale(0.4);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -10px) scale(1.15);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -80px) scale(0.9);
+  }
+}
+@keyframes lbIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+@keyframes lbFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
+@keyframes lbFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+}
+@keyframes petalFall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  10% {
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift), 110vh, 0) rotate(var(--spin));
+  }
+}
+@keyframes petalBurst {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--angle)) translateY(0) rotate(0deg);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--angle)) translateY(calc(var(--dist) * -1)) rotate(var(--spin)) translateY(60px);
+  }
+}
+
+/* ── Reduced motion: clean, static experience ───────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .petals,
+  .opening-mandala {
+    display: none;
+  }
+  .hero-frame {
+    translate: none;
+  }
+  .opening.is-opening {
+    animation: none;
+    opacity: 0;
+    transition: opacity 0.2s !important;
+  }
+}
