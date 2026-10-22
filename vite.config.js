@@ -8,7 +8,7 @@ import { transformHtml } from './build/html-meta.js';
  * and also when the dist folder is uploaded manually.
  */
 export default defineConfig({
-  base: '/sushant-jigyasa-wedding/',
+  base: './',
   plugins: [
     react(),
     {
